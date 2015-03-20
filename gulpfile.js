@@ -6,7 +6,6 @@ var browserSync = require('browser-sync');
 var gulp        = require('gulp');
 var lazypipe    = require('lazypipe');
 var merge       = require('merge-stream');
-var coffee      = require('gulp-coffee');
 
 // See https://github.com/austinpray/asset-builder
 var manifest = require('asset-builder')('./assets/manifest.json');
@@ -140,7 +139,7 @@ var writeToManifest = function(directory) {
 
 gulp.task('coffee', function() {
   gulp.src('./assets/scripts/*.coffee')
-  .pipe(coffee({bare: true}).on('error', function(err) {
+  .pipe($.coffee({bare: true}).on('error', function(err) {
     console.error(err.message);
   }))
   .pipe(gulp.dest('./assets/scripts/'));
@@ -233,7 +232,7 @@ gulp.task('watch', function() {
     }
   });
   gulp.watch([path.source + 'styles/**/*'], ['styles']);
-  gulp.watch([path.source + 'scripts/**/*'], ['coffee', 'jshint', 'scripts']);
+  gulp.watch([path.source + 'scripts/**/*'], ['scripts']);
   gulp.watch([path.source + 'fonts/**/*'], ['fonts']);
   gulp.watch([path.source + 'images/**/*'], ['images']);
   gulp.watch(['bower.json', 'assets/manifest.json'], ['build']);
@@ -245,7 +244,7 @@ gulp.task('watch', function() {
 // ### Build
 // `gulp build` - Run all the build tasks but don't clean up beforehand.
 // Generally you should be running `gulp` instead of `gulp build`.
-gulp.task('build', ['styles', 'coffee', 'scripts', 'fonts', 'images']);
+gulp.task('build', ['styles', 'scripts', 'fonts', 'images']);
 
 // ### Wiredep
 // `gulp wiredep` - Automatically inject Less and Sass Bower dependencies. See

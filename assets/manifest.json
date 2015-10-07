@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "sage-app.js": {
+      "bower": [
+        "angular",
+        "angular-ui-router",
+        "angular-bootstrap"
+      ],
+      "files": [
+        "sage-app/**/*.js"
+      ]
+    },
     "main.js": {
       "files": [
         "scripts/main.js"

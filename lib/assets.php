@@ -74,5 +74,14 @@ function assets() {
 
   wp_enqueue_script('modernizr', asset_path('scripts/modernizr.js'), [], null, true);
   wp_enqueue_script('sage/js', asset_path('scripts/main.js'), ['jquery'], null, true);
+
+  // Enqueue sageApp
+  if (is_page( 'sage-app' )) {
+    wp_enqueue_script('sage/app', asset_path('scripts/sage-app.js'), [], null, true);
+
+    wp_localize_script('sage/app', 'GLOBALS', [
+      'partialsPath' => get_template_directory_uri() . '/assets/sage-app/partials/'
+    ]);
+  }
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);

@@ -18,7 +18,13 @@
     // All pages
     'common': {
       init: function() {
-        // JavaScript to be fired on all pages
+        var waypoint = new Waypoint({
+          element: $('.main'),
+          handler: function(direction) {
+            console.log('Scrolled to waypoint!');
+            console.log('Direction: ' + direction);
+          }
+        });
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired

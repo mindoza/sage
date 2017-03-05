@@ -26,9 +26,15 @@ function setup() {
 
   // Register wp_nav_menu() menus
   // http://codex.wordpress.org/Function_Reference/register_nav_menus
-  register_nav_menus([
-    'primary_navigation' => __('Primary Navigation', 'sage')
-  ]);
+    register_nav_menus([
+        'primary_navigation' => __('Primary Navigation', 'sage')
+  // Theme menu navwalker we override line above minde!!!!!!!!!!
+  //'primary_navigation' => __( 'Primary Menu', 'THEMENAME' )
+    ]);
+  // Theme menu navwalker we override 3 lines above minde!!!!!!!!!!!1
+  //  register_nav_menus( array(
+  //    'primary_navigation' => __( 'Primary Menu', 'THEMENAME' ),
+  //  ) ); )
 
   // Enable post thumbnails
   // http://codex.wordpress.org/Post_Thumbnails
@@ -102,5 +108,23 @@ function assets() {
   }
 
   wp_enqueue_script('sage/js', Assets\asset_path('scripts/main.js'), ['jquery'], null, true);
+  // Enqueue sageApp
+  //--------------- recognize pages as angular apps ------------------
+  // $page_name = $post->post_name;// is_page( 'sage-app' ) || is_page( 'zopa-zopa' ) || is_page( 'results' )) {
+  // if(strstr('-app', $page_name)){// the treat as ng-app
+  if (is_page( 'sage-app' ) || is_page( 'zopa-zopa' ) || is_page( 'results' )) {
+    wp_enqueue_script('sage/app', Assets\asset_path('scripts/sage-app.js'), [], null, true);
+
+    wp_localize_script('sage/app', 'GLOBALS', [
+       'partialsPath' => get_template_directory_uri() . '/assets/sage-app/partials/'
+     ]);
+	// Variables for app script
+	wp_localize_script( 'sage/app', 'wpapi',
+	    array(
+	      'api' => get_bloginfo( 'wpurl' ) . '/wp-json/',
+	   )
+	 );
+
+  }
 }
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\assets', 100);

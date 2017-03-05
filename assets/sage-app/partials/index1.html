@@ -1,0 +1,16 @@
+{{hello}}
+<br>
+
+<a ui-sref="index.substate">Click here to load substate below:</a>
+
+<!-- Child UI Views will load here -->
+<div class="well" ui-view></div>
+
+<a ui-sref="index.lottery({foo: '2007'})">Click here to load lottery above:</a>
+<a ui-sref="index.zopa">Click here to load zopa above:</a>
+<br>
+
+Here's a popover from <code>ui.bootstrap</code>:
+<button popover="I appeared on mouse enter!" popover-trigger="mouseenter" type="button" class="btn btn-default" ng-click="addAlert()">2000</button>
+
+<div class="well" ui-view="columnTwo"></div>

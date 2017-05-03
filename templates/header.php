@@ -1,9 +1,7 @@
 <header class="banner">
   <div class="container">
     <div class="row" id="header-logo">
-      
          <a href="<?php echo home_url(); ?>"><img src="http://wp.com/content//uploads/2016/11/logo_293_122.png" alt=""></a>
-      
   <!-- <a class="brand" href="<? esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a> -->
   <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
